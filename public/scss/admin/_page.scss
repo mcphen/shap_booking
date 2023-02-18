@@ -1,0 +1,228 @@
+.gmz-new-page{
+  .widget-header{
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .widget-content-area{
+  }
+  .gmz-form-wizard-wrapper{
+    .steps{
+      display: none;
+    }
+    .actions{
+      a[href="#previous"]{
+        display: none;
+      }
+    }
+  }
+}
+
+.order-detail{
+  h4{
+    padding: 18px 25px 0 25px;
+  }
+  &__content{
+    .nav.nav-tabs{
+      padding-left: 25px;
+      padding-right: 25px;
+      .nav-item{
+        .nav-link{
+          font-size: 16px;
+          font-weight: 500;
+        }
+      }
+    }
+    .cart-info{
+      padding: 25px;
+      border-radius: 3px;
+      &__heading{
+        margin-bottom: 10px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        .thumbnail{
+          width: 70px;
+          height: 70px;
+        }
+        .info{
+          padding-left: 15px;
+          .title{
+            font-size: 19px;
+            a{
+
+            }
+          }
+          .location{
+            margin-bottom: 0;
+            color: gray;
+            i{
+
+            }
+          }
+        }
+      }
+      &__meta{
+        padding:0;
+        margin: 0;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+        li{
+          list-style: none;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 7px 0px;
+          border-bottom: 1px dotted #eee;
+          &:last-child{
+            border-bottom: none;
+            padding-bottom: 0;
+          }
+          .label{
+            font-weight: 450;
+          }
+          .value{
+            font-size: 16px;
+            font-weight: 500;
+          }
+        }
+      }
+      &__equipment,
+      &__insurance{
+        .__label{
+          font-size: 16px;
+          font-weight: 500;
+          margin-bottom: 10px;
+          margin-top: 15px;
+          display: block;
+        }
+        table{
+          width: 100%;
+          border: 1px solid #eee;
+          border-collapse: collapse;
+          border-radius: 3px;
+          tr{
+            th{
+              font-size: 14px;
+              border: 1px solid #eee;
+              background: #eee;
+              padding: 5px 7px;
+              font-weight: 500;
+            }
+            td{
+              padding: 5px 7px;
+              border: 1px solid #eee;
+              font-weight: 450;
+            }
+          }
+        }
+      }
+      &__price{
+        margin-top: 15px;
+        ul{
+          padding:0;
+          margin: 0;
+          li{
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 7px 0px;
+            border-bottom: 1px dotted #eee;
+            &:last-child{
+              border-bottom: none;
+              padding-bottom: 0;
+            }
+            .label{
+              font-weight: 450;
+            }
+            .value{
+              font-size: 16px;
+              font-weight: 500;
+            }
+            &.total{
+              background: #eee;
+              padding: 15px 25px;
+              margin-left: -25px;
+              margin-right: -25px;
+              .label{
+                font-size: 16px;
+                font-weight: 500;
+              }
+              .value{
+                font-size: 20px;
+                font-weight: 500;
+                color: #445ede;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and(min-width: 768px) {
+  #gmz-settings-page {
+    padding: 5px 7px;
+
+    .nav.nav-pills {
+      width: 25%;
+      float: left;
+      display: block;
+
+      .nav-item {
+        display: block;
+        margin-bottom: 0;
+        margin-right: 0;
+
+        .nav-link {
+          border-radius: 0;
+          border: 1px solid #dfdfdf;
+          border-bottom: none;
+          padding: 15px 10px;
+          font-weight: 500;
+
+          &.active {
+            background-color: #445ede;
+            position: relative;
+
+            &:after {
+              content: '';
+              display: block;
+              border: 7px solid #fff;
+              width: 14px;
+              height: 14px;
+              transform: rotate(45deg);
+              position: absolute;
+              top: 50%;
+              right: -8px;
+              margin-top: -7px;
+              background: #fff;
+            }
+          }
+        }
+
+        &:last-child {
+          .nav-link {
+            border-bottom: 1px solid #dfdfdf;
+          }
+        }
+      }
+    }
+
+    #icon-pills-tabContent {
+      padding-left: 20px;
+      width: 75%;
+      float: right;
+
+      .tab-pane {
+        padding-top: 11px;
+
+        .nav.nav-tabs {
+          margin-top: 5px !important;
+        }
+      }
+    }
+  }
+}
+

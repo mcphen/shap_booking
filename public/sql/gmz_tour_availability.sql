@@ -1,0 +1,2 @@
+INSERT INTO `gmz_tour_availability` (`id`, `post_id`, `check_in`, `check_out`, `adult_price`, `children_price`, `infant_price`, `group_size`, `booked`, `status`, `created_at`, `updated_at`) VALUES
+(1, 3, 1621270800, 1621270800, 70.00, 60.00, 50.00, 6, 6, 'available', '2021-05-14 06:29:22', '2021-05-14 06:29:22');

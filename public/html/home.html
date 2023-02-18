@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/vendor/slick-1.8.1/slick.css">
+    <link rel="stylesheet" href="assets/vendor/daterangepicker-master/daterangepicker.css">
+    <link rel="stylesheet" href="assets/vendor/font-awesome-5/css/all.min.css">
+    <link rel="stylesheet" href="assets/vendor/ion.rangeSlider-master/css/ion.rangeSlider.min.css">
+
+    <link rel="stylesheet" href="assets/css/main.css">
+
+</head>
+<body>
+<!--<div class="top-bar bg-dark text-center py-1">
+    <a href="#" class="text-white">Promotion Information!</a>
+</div>-->
+<header class="site-header">
+    <div class="site-branding">
+        <h1><a href="#">iBooking</a></h1>
+    </div>
+    <div class="site-navigation">
+        <ul class="main-menu">
+            <li class="menu-item"><a href="home.html">Home</a></li>
+            <li class="menu-item menu-item-has-children current-menu-parent">
+                <a href="archive.html">Archive</a>
+                <ul class="sub-menu">
+                    <li class="menu-item current-menu-item">
+                        <a href="#">sub-menu-1</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#">sub-menu-2</a>
+                    </li>
+                    <li class="menu-item current-menu-item">
+                        <a href="#">sub-menu-3</a>
+                        <ul class="sub-menu">
+                            <li class="menu-item current-menu-item">
+                                <a href="#">sub-menu-1</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="#">sub-menu-2</a>
+                            </li>
+                            <li class="menu-item current-menu-item view-all">
+                                <a href="#">sub-menu-3</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-item"><a href="#">Menu 2</a></li>
+            <li class="menu-item"><a href="#">Menu 3</a></li>
+            <li class="menu-item"><a href="#">Menu 4</a></li>
+            <li class="menu-item"><a href="#">Menu 5</a></li>
+        </ul>
+    </div>
+    <div class="user-navigation">
+        <ul>
+            <li><a href="#" class="btn btn-primary">Bussines</a></li>
+            <li><a href="#" class="btn btn-dark"><i class="fal fa-sign-in pr-2"></i>Sign In</a></li>
+        </ul>
+    </div>
+</header>
+
+<div class="site-content">
+    <section class="hero-slider">
+        <div class="container-fluid no-gutters p-0">
+            <div class="slider-1">
+                <div class="item">
+                    <img src="assets/image/temp/8osnmlvs70161.jpg" alt="#">
+                </div>
+                <div class="item">
+                    <img src="assets/image/temp/Hoi-An-District-1.jpg" alt="#">
+                </div>
+
+            </div>
+            <div class="search-center">
+                <div class="container">
+                    <p class="search-center__title">Enjoy a great ride with ibooking</p>
+                    <form id="search-1" class="search-form" action="">
+                        <div class="search-form__basic">
+                            <div class="search-form__address">
+                                <i class="fal fa-car-building"></i>
+                                <input type="text" name="address" id="address" placeholder="Location">
+                            </div>
+                            <input type="text" class="input-hidden check-in-out-field"
+                                   name="checkInOut">
+                            <div class="search-form__from">
+                                <i class="fal fa-calendar-alt"></i>
+                                <span class="check-in-render">Pick-up</span>
+
+                            </div>
+                            <div class="search-form__to">
+                                <i class="fal fa-calendar-alt"></i>
+                                <span class="check-out-render">Return</span>
+                            </div>
+                            <input type="text" class="input-hidden check-in-field"
+                                   name="checkIn">
+                            <input type="text" class="input-hidden check-out-field"
+                                   name="checkOut">
+                            <button class="btn search-form__more" type="button"><i class="fal fa-search-plus"></i></button>
+                            <button class="btn btn-primary search-form__search" type="submit"><i class="fal fa-search"></i>Search
+                            </button>
+                        </div>
+                        <div class="search-form__advanced bg-white">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="search-form__label">Price</div>
+                                        <input type="text" class="price-range-slider js-range-slider" name="price_range"
+                                               value=""/>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="search-form__label">Car Type</div>
+                                        <label class="checkbox-inline"><input type="checkbox" value="">Option 1</label>
+                                        <label class="checkbox-inline"><input type="checkbox" value="">Option 2</label>
+                                        <label class="checkbox-inline"><input type="checkbox" value="">Option 3</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="car-type bg-section">
+        <div class="container py-40">
+            <h2 class="section-title mb-20"><a href="#">Car Type</a></h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="car-type__item">
+                        <div class="car-type__left">
+                            <h3 class="car-type__name"><a href="#">Small</a></h3>
+                            <div class="car-type__description">
+                                <a href="#" class="_adults">4 Adults</a>
+                                <a href="#" class="_bags">2 bags</a>
+                            </div>
+                            <a href="#" class="btn btn-primary car-type__detail">View Detail</a>
+                        </div>
+                        <div class="car-type__right">
+                            <a href="#">
+                                <img class="_image-car" src="./assets/image/temp/economy.jpg" alt="car small">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="car-type__item">
+                        <div class="car-type__left">
+                            <h3 class="car-type__name"><a href="#">Small</a></h3>
+                            <div class="car-type__description">
+                                <a href="#" class="_adults">4 Adults</a>
+                                <a href="#" class="_bags">2 bags</a>
+                            </div>
+                            <a href="#" class="btn btn-primary car-type__detail">View Detail</a>
+                        </div>
+                        <div class="car-type__right">
+                            <a href="#">
+                                <img class="_image-car" src="./assets/image/temp/economy.jpg" alt="car small">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="car-type__item">
+                        <div class="car-type__left">
+                            <h3 class="car-type__name"><a href="#">Small</a></h3>
+                            <div class="car-type__description">
+                                <a href="#" class="_adults">4 Adults</a>
+                                <a href="#" class="_bags">2 bags</a>
+                            </div>
+                            <a href="#" class="btn btn-primary car-type__detail">View Detail</a>
+                        </div>
+                        <div class="car-type__right">
+                            <a href="#">
+                                <img class="_image-car" src="./assets/image/temp/economy.jpg" alt="car small">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="car-type__item">
+                        <div class="car-type__left">
+                            <h3 class="car-type__name"><a href="#">Small</a></h3>
+                            <div class="car-type__description">
+                                <a href="#" class="_adults">4 Adults</a>
+                                <a href="#" class="_bags">2 bags</a>
+                            </div>
+                            <a href="#" class="btn btn-primary car-type__detail">View Detail</a>
+                        </div>
+                        <div class="car-type__right">
+                            <a href="#">
+                                <img class="_image-car" src="./assets/image/temp/economy.jpg" alt="car small">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="car-type__item">
+                        <div class="car-type__left">
+                            <h3 class="car-type__name"><a href="#">Small</a></h3>
+                            <div class="car-type__description">
+                                <a href="#" class="_adults">4 Adults</a>
+                                <a href="#" class="_bags">2 bags</a>
+                            </div>
+                            <a href="#" class="btn btn-primary car-type__detail">View Detail</a>
+                        </div>
+                        <div class="car-type__right">
+                            <a href="#">
+                                <img class="_image-car" src="./assets/image/temp/economy.jpg" alt="car small">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="car-type__item">
+                        <div class="car-type__left">
+                            <h3 class="car-type__name"><a href="#">Small</a></h3>
+                            <div class="car-type__description">
+                                <a href="#" class="_adults">4 Adults</a>
+                                <a href="#" class="_bags">2 bags</a>
+                            </div>
+                            <a href="#" class="btn btn-primary car-type__detail">View Detail</a>
+                        </div>
+                        <div class="car-type__right">
+                            <a href="#">
+                                <img class="_image-car" src="./assets/image/temp/economy.jpg" alt="car small">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-40 bg-section">
+        <div class="container">
+            <h2 class="section-title mb-20">List Car Grid</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="car-item car-item--grid">
+                        <div class="car-item__thumbnail">
+                            <a href="#">
+                                <img src="./assets/image/temp/vinfat.jpg" alt="vinfast">
+                            </a>
+                        </div>
+                        <div class="car-item__details">
+                            <a class="car-item__label" href="#">Featured</a>
+                            <h3 class="car-item__title"><a href="#">Vinfast lux 2.0</a></h3>
+                            <a class="car-item__type" href="#">Sedan</a>
+                            <div class="car-item__meta">
+                                <div class="i-meta" data-toggle="tooltip" title="4 Adults">
+                                    <span class="i-meta__icon"><i class="fas fa-user"></i></span>
+                                    <span class="i-meta__figure">4</span>
+                                </div>
+                                <div class="i-meta" data-toggle="tooltip" title="5 doors">
+                                    <span class="i-meta__icon"><i class="fas fa-car-side"></i></span>
+                                    <span class="i-meta__figure">5</span>
+                                </div>
+                                <div class="i-meta" data-toggle="tooltip" title="3 bags">
+                                    <span class="i-meta__icon"><i class="fas fa-suitcase-rolling"></i></span>
+                                    <span class="i-meta__figure">3</span>
+                                </div>
+                                <div class="i-meta" data-toggle="tooltip" title="Automatic">
+                                    <span class="i-meta__icon"><i class="fas fa-shopping-bag"></i></span>
+                                    <span class="i-meta__figure">A</span>
+                                </div>
+                            </div>
+                            <a class="car-item__location" href="#"><i class="fas fa-map-marker-alt mr-2"></i>Hanoi, Vietnam</a>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="car-item__price">
+                                    <span class="_retail">$20.00</span><span class="_unit">Per day</span>
+                                </div>
+                                <a class="btn btn-primary" href="#">View Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="list-location py-40">
+        <div class="container">
+            <h2 class="section-title mb-30">List Location</h2>
+            <div class="carousel-s1">
+                <div class="location-item">
+                    <div class="location-item__thumbnail">
+                        <a href="#">
+                            <img class="rounded-10" src="./assets/image/temp/500x266__1.png" alt="Quang nam">
+                        </a>
+                    </div>
+                    <div class="location-item__details">
+                        <h3 class="location-item__title"><a href="#">Cau Giay, Hanoi</a></h3>
+                        <div class="location-item__number-car">There are <span class="_number">358</span> cars</div>
+                        <a href="#" class="location-item__find">Find car</a>
+                    </div>
+                </div>
+                <div class="location-item">
+                    <div class="location-item__thumbnail">
+                        <a href="#">
+                            <img class="rounded-10" src="./assets/image/temp/500x266__1.png" alt="Quang nam">
+                        </a>
+                    </div>
+                    <div class="location-item__details">
+                        <h3 class="location-item__title"><a href="#">Cau Giay, Hanoi</a></h3>
+                        <div class="location-item__number-car">There are <span class="_number">358</span> cars</div>
+                        <a href="#" class="location-item__find">Find car</a>
+                    </div>
+                </div>
+                <div class="location-item">
+                    <div class="location-item__thumbnail">
+                        <a href="#">
+                            <img class="rounded-10" src="./assets/image/temp/500x266__1.png" alt="Quang nam">
+                        </a>
+                    </div>
+                    <div class="location-item__details">
+                        <h3 class="location-item__title"><a href="#">Cau Giay, Hanoi</a></h3>
+                        <div class="location-item__number-car">There are <span class="_number">358</span> cars</div>
+                        <a href="#" class="location-item__find">Find car</a>
+                    </div>
+                </div>
+                <div class="location-item">
+                    <div class="location-item__thumbnail">
+                        <a href="#">
+                            <img class="rounded-10" src="./assets/image/temp/500x266__1.png" alt="Quang nam">
+                        </a>
+                    </div>
+                    <div class="location-item__details">
+                        <h3 class="location-item__title"><a href="#">Cau Giay, Hanoi</a></h3>
+                        <div class="location-item__number-car">There are <span class="_number">358</span> cars</div>
+                        <a href="#" class="location-item__find">Find car</a>
+                    </div>
+                </div>
+                <div class="location-item">
+                    <div class="location-item__thumbnail">
+                        <a href="#">
+                            <img class="rounded-10" src="./assets/image/temp/500x266__1.png" alt="Quang nam">
+                        </a>
+                    </div>
+                    <div class="location-item__details">
+                        <h3 class="location-item__title"><a href="#">Cau Giay, Hanoi</a></h3>
+                        <div class="location-item__number-car">There are <span class="_number">358</span> cars</div>
+                        <a href="#" class="location-item__find">Find car</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="testimonial py-50">
+        <div class="container">
+            <div class="carousel-s2">
+                <div class="testimonial-item text-white text-center">
+                    <i class="fas fa-quote-left fa-3x"></i>
+                    <p class="testimonial-item__comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus expedita maiores perspiciatis quae quas sequi sunt vel voluptas voluptatum!</p>
+                    <p class="testimonial-item__author">Crocodile</p>
+                </div>
+                <div class="testimonial-item text-white text-center">
+                    <i class="fas fa-quote-left fa-3x"></i>
+                    <p class="testimonial-item__comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus expedita maiores perspiciatis quae quas sequi sunt vel voluptas voluptatum!</p>
+                    <p class="testimonial-item__author">Crocodile</p>
+                </div>
+                <div class="testimonial-item text-white text-center">
+                    <i class="fas fa-quote-left fa-3x"></i>
+                    <p class="testimonial-item__comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus expedita maiores perspiciatis quae quas sequi sunt vel voluptas voluptatum!</p>
+                    <p class="testimonial-item__author">Crocodile</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="blog-list blog-list--grid py-40">
+        <div class="container">
+            <h2 class="section-title mb-20">List Car Grid</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="blog-item blog-item--grid">
+                        <div class="blog-item__thumbnail">
+                            <a href="#">
+                                <img src="./assets/image/temp/vinfat.jpg" alt="vinfast">
+                            </a>
+                        </div>
+                        <div class="blog-item__details">
+                            <a class="blog-item__label" href="#">News</a>
+                            <h3 class="blog-item__title"><a href="#">Vinfast lux 2.0</a></h3>
+                            <div class="blog-item__post-meta">
+                                <span class="_date">June 16, 2020</span>
+                                <a class="_categories" href="#">In <span>Carnews</span></a>
+                            </div>
+                            <p class="blog-item__excrept pt-3" href="#"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam beatae culpa, deserunt et itaque iure magnam natus, necessitatibus perferendis quae qui reprehenderit, sunt voluptate voluptates. Laudantium obcaecati perspiciatis praesentium!</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer class="site-footer pt-60 pb-40">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="widget widget-nav">
+                        <h4 class="widget__title">Cars</h4>
+                        <ul class="widget-nav__list">
+                            <li><a href="#">Lorem ipsum.</a></li>
+                            <li><a href="#">Doloremque, omnis.</a></li>
+                            <li><a href="#">Aperiam, nam.</a></li>
+                            <li><a href="#">Explicabo, incidunt!</a></li>
+                            <li><a href="#">Dolorem, labore.</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="widget widget-nav">
+                        <h4 class="widget__title">Cars</h4>
+                        <ul class="widget-nav__list">
+                            <li><a href="#">Lorem ipsum.</a></li>
+                            <li><a href="#">Doloremque, omnis.</a></li>
+                            <li><a href="#">Aperiam, nam.</a></li>
+                            <li><a href="#">Explicabo, incidunt!</a></li>
+                            <li><a href="#">Dolorem, labore.</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="widget widget-nav">
+                        <h4 class="widget__title">Cars</h4>
+                        <ul class="widget-nav__list">
+                            <li><a href="#">Lorem ipsum.</a></li>
+                            <li><a href="#">Doloremque, omnis.</a></li>
+                            <li><a href="#">Aperiam, nam.</a></li>
+                            <li><a href="#">Explicabo, incidunt!</a></li>
+                            <li><a href="#">Dolorem, labore.</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="widget widget-select">
+                        <h4 class="widget__title">Language</h4>
+                        <div class="select-language dropdown">
+                            <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="_flag" src="./assets/image/flag/en.png" alt="en"> English
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#"><img class="_flag" src="./assets/image/flag/en.png" alt="en">Vietnamese</a>
+                                <a class="dropdown-item" href="#"><img class="_flag" src="./assets/image/flag/en.png" alt="en">German</a>
+                                <a class="dropdown-item" href="#"><img class="_flag" src="./assets/image/flag/en.png" alt="en">Chinese</a>
+                                <a class="dropdown-item" href="#"><img class="_flag" src="./assets/image/flag/en.png" alt="en">Italian</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom pt-30">
+        <div class="container">
+            <ul class="menu-footer">
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Term & Conditions</a></li>
+                <li><a href="#">Ad Choices</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+            <div class="copyright text-center">©2020 iBooking - All rights reserved.</div>
+            <ul class="social-footer">
+                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+
+<script src="assets/vendor/jquery-3.5.1.min.js"></script>
+<script src="assets/vendor/bootstrap-4.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/slick-1.8.1/slick.min.js"></script>
+<script src="assets/vendor/daterangepicker-master/moment.min.js"></script>
+<script src="assets/vendor/daterangepicker-master/daterangepicker.js"></script>
+<script src="assets/vendor/ion.rangeSlider-master/js/ion.rangeSlider.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

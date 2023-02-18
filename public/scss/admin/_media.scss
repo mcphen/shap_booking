@@ -1,0 +1,258 @@
+#my-dropzone .message {
+  font-family: "Segoe UI Light", "Arial", serif;
+  font-weight: 600;
+  color: #0087F7;
+  font-size: 1.5em;
+  letter-spacing: 0.05em;
+}
+
+.dropzone {
+  border: 2px dashed #0087F7;
+  background: white;
+  border-radius: 5px;
+  min-height: 300px;
+  padding: 90px 0;
+  vertical-align: baseline;
+}
+
+.gmz-all-media{
+  .gmz-all-media-render{
+    .render {
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      li {
+        float: left;
+        list-style: none;
+        overflow: hidden;
+        width: 12.5%;
+        padding: 8px;
+        margin: 0;
+        .gmz-media-item{
+          position: relative;
+          padding-bottom: 100%;
+          background: #eee;
+          height: 0;
+          border: 1px solid #eee;
+          border-radius: 3px;
+          overflow: hidden;
+          cursor: pointer;
+          .gmz-media-thumbnail{
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            img{
+              position: absolute;
+              top:0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+  }
+  table{
+    tbody{
+      tr{
+        td{
+          &.footable-first-visible{
+            min-width: 65px;
+          }
+          .footable-toggle{
+            float: left;
+            position: relative;
+            top: -2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.gmz-media-upload-area{
+  cursor: pointer;
+  padding: 10px;
+  form{
+    border: 2px dashed #eee;
+    padding: 20px;
+    position: relative;
+    svg{
+      width: 50px;
+      height: auto;
+    }
+    .text-muted{
+      margin-bottom: 0;
+      span{
+        display: block;
+      }
+    }
+  }
+}
+
+.gmz-media-modal{
+  height: 100vh;
+  .modal-dialog{
+    height: calc(100% - 20px);
+    margin: 10px auto;
+  }
+  .modal-content{
+    height: 100%;
+    .modal-header{
+      padding: 10px 15px;
+    }
+    .modal-footer{
+      padding: 5px 15px;
+    }
+    .modal-body{
+      min-height: 100px;
+      overflow: auto;
+      .gmz-loader{
+        display: block;
+      }
+      li {
+        float: left;
+        list-style: none;
+        overflow: hidden;
+        width: 12.5%;
+        padding: 8px;
+        margin: 0;
+        .gmz-media-item{
+          position: relative;
+          padding-bottom: 100%;
+          &.selected{
+            .gmz-media-thumbnail{
+              border: 2px solid #007bff;
+              &:before{
+                content: '';
+                display: block;
+                background: #008489;
+                width: 20px;
+                height: 20px;
+                z-index: 9;
+                position: absolute;
+                border-radius: 50%;
+                right: -8px;
+                top: -9px;
+              }
+              &:after{
+                content: '';
+                display: inline-block;
+                -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+                height: 10px;
+                width: 6px;
+                border-bottom: 2px solid #fff;
+                border-right: 2px solid #fff;
+                position: absolute;
+                right: -2px;
+                top: -5px;
+                z-index: 9;
+              }
+            }
+          }
+          .gmz-media-thumbnail{
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            img{
+              position: absolute;
+              top:0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+    .btn-select{
+      display: none;
+    }
+    .btn-delete{
+      display: none;
+    }
+  }
+  .gmz-media-upload-area{
+    position: absolute;
+    background: #fff;
+    width: 100%;
+    left: 0;
+    top: 54px;
+    z-index: 99;
+    display: none;
+    &.show{
+      display: block;
+    }
+  }
+}
+
+.filter-layout{
+  a{
+    svg{
+      fill: gray;
+    }
+    &.active{
+      svg{
+        fill: #0087F7;
+      }
+    }
+  }
+}
+
+.media-item-modal{
+  .modal-body{
+    ul{
+      padding-left: 15px;
+      margin-top: 15px;
+      li{
+
+      }
+    }
+  }
+}
+
+@media(max-width: 767px){
+  .gmz-all-media{
+    .gmz-all-media-render{
+      .render{
+        li{
+          width: 20%;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 575px){
+  .gmz-all-media{
+    .gmz-all-media-render{
+      .render{
+        li{
+          width: 30%;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 420px){
+  .gmz-all-media{
+    .gmz-all-media-render{
+      .render{
+        li{
+          width: 50%;
+        }
+      }
+    }
+  }
+}

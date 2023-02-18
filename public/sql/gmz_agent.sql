@@ -1,0 +1,6 @@
+INSERT INTO `gmz_agent` (`id`, `post_title`, `post_content`, `location_address`, `thumbnail_id`, `gallery`, `rating`, `is_featured`, `video`, `post_type`, `author`, `status`, `created_at`, `updated_at`) VALUES
+(1, '[:en]Aurora[:vi]New agent 1621934632[:ja]New agent 1621934632[:]', '[:en][:vi][:ja][:]', NULL, '208', NULL, NULL, '0', NULL, 'beauty', 1, 'publish', '2021-05-25 08:23:52', '2021-05-25 08:30:22'),
+(2, '[:en]Bernice[:vi]New agent 1621935037[:ja]New agent 1621935037[:]', '[:en][:vi][:ja][:]', NULL, '207', NULL, NULL, '0', NULL, 'beauty', 1, 'publish', '2021-05-25 08:30:37', '2021-05-25 08:30:47'),
+(3, '[:en]Eira[:vi]New agent 1621935053[:ja]New agent 1621935053[:]', '[:en][:vi][:ja][:]', NULL, '206', NULL, NULL, '0', NULL, 'beauty', 1, 'publish', '2021-05-25 08:30:53', '2021-05-25 08:31:02'),
+(4, '[:en]Ernesta[:vi]New agent 1621935069[:ja]New agent 1621935069[:]', '[:en][:vi][:ja][:]', NULL, '205', NULL, NULL, '0', NULL, 'beauty', 1, 'publish', '2021-05-25 08:31:09', '2021-05-25 08:31:19'),
+(5, '[:en]Mimi[:vi]New agent 1621935087[:ja]New agent 1621935087[:]', '[:en][:vi][:ja][:]', NULL, '204', NULL, NULL, '0', NULL, 'beauty', 1, 'publish', '2021-05-25 08:31:27', '2021-05-25 08:31:34');
