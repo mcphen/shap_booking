@@ -231,6 +231,16 @@ DATA;
                 'tab' => 'payu',
                 'condition' => 'payment_payu_enable:on'
             ],
+            [
+                'id' => 'payment_payu_client_secret',
+                'label' => __('Client Secret'),
+                'type' => 'text',
+                'layout' => 'col-12 col-md-6',
+                'std' => '',
+                'break' => true,
+                'tab' => 'payu',
+                'condition' => 'payment_payu_enable:on'
+            ],
         ];
     }
 }

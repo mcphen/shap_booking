@@ -28,7 +28,7 @@ class Hotel extends Model
             'nearby_restaurants_cafes', 'nearby_natural_beauty', 'nearby_airports', 'faq',
             'enable_cancellation', 'cancel_before', 'cancellation_detail', 'property_type',
             'hotel_facilities', 'hotel_services', 'rating', 'is_featured', 'author', 'status',
-            'booking_form', 'external_booking', 'external_link', 'booking_type'
+            'booking_form', 'external_booking', 'external_link', 'booking_type','price_one_hour'
         ]);
         $this->fillable = $fields;
     }

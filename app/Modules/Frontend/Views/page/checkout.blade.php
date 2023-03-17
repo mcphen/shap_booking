@@ -50,7 +50,8 @@
                         <h1>{{__('Checkout')}}</h1>
                     </div>
 
-                    <form class="gmz-form-action" id="checkout-form" method="post" action="{{url('checkout')}}">
+                    <form class="" id="checkout-form" method="post" action="{{url('checkout')}}">
+                        @csrf
                         @include('Frontend::components.loader')
                         <div class="row">
                             <div class="form-group col-lg-6">
@@ -140,6 +141,16 @@
                             @else
                                 <p>{{__('No payments available')}}</p>
                             @endif
+                            <div class="payment-item">
+                                <label>
+                                        <span class="check-payment">
+                                            <input type="radio" name="payment_method"
+                                                   id="payment-method-paydunia}" value="paydunia">
+                                        </span>
+                                    <span class="payment-title">Paydunia</span>
+
+                                </label>
+                            </div>
                         </div>
 
                         <label class="checkbox-inline mt-5">

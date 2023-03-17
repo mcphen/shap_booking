@@ -250,7 +250,7 @@ class OrderService extends AbstractService
                 $order_data = Eventy::filter('gmz_checkout_data', array(
                     'sku' => uniqid(),
                     'post_id' => $cart['post_id'],
-                    'total' => $cart['total'],
+                    'total' => $cart['total'], // TOTAL A RECUPERER
                     'number' => isset($cart_data['number']) ? $cart_data['number'] : 1,
                     'buyer' => $user_id,
                     'owner' => $serviceObject['author'],
@@ -311,6 +311,239 @@ class OrderService extends AbstractService
                 }
 
                 $after_payment = \BaseGateway::inst()->doCheckout($gateways_obj, $order_id);
+                if (!isset($after_payment['order_id'])) {
+                    $after_payment['order_id'] = $order_id;
+                }
+                if (isset($after_payment['status']) && $after_payment['status']) {
+                    if ($post_type == GMZ_SERVICE_HOTEL) {
+                        $roomAvaiRepo = RoomAvailabilityRepository::inst();
+                        $roomAvaiRepo->updateBookedData($cart_data['check_in'], $cart_data['check_out'], $cart_data['rooms']);
+                    } elseif ($post_type == GMZ_SERVICE_CAR) {
+                        $carAvaiRepo = CarAvailabilityRepository::inst();
+                        $carAvaiRepo->updateBookedData($cart_data['check_in'], $cart_data['check_out'], $cart_data['number'], $serviceObject);
+                    } elseif ($post_type == GMZ_SERVICE_APARTMENT) {
+                        $apartmentAvaiRepo = ApartmentAvailabilityRepository::inst();
+                        $apartmentAvaiRepo->updateBookedData($cart_data['check_in'], $cart_data['check_out'], $serviceObject);
+                    } elseif ($post_type == GMZ_SERVICE_SPACE) {
+                        $spaceAvaiRepo = SpaceAvailabilityRepository::inst();
+                        $spaceAvaiRepo->updateBookedData($cart_data['check_in'], $cart_data['check_out'], $serviceObject);
+                    } elseif ($post_type == GMZ_SERVICE_TOUR) {
+                        $tourAvaiRepo = TourAvailabilityRepository::inst();
+                        $tourAvaiRepo->updateBookedData($cart_data['check_in'], $cart_data['check_out'], $serviceObject, $cart['adult'], $cart['children']);
+                    } elseif ($post_type == GMZ_SERVICE_BEAUTY) {
+                        $agentAvaiRepo = AgentAvailabilityRepository::inst();
+                        $agentAvaiRepo->updateBookedData($cart_data['check_in'], $cart_data['check_out'], $cart_data['agent_id'], $order_id, 'booked');
+                    }
+                }
+
+                return $after_payment;
+            }
+        }
+        return [
+            'status' => false,
+            'message' => __('The order is invalid')
+        ];
+    }
+
+    public function checkOutPaydunia($request,$token)
+    {
+        $cart = \Cart::inst()->getCart();
+        if (!empty($cart)) {
+            $actionRespon = apply_filter('gmz_before_do_checkout', [], $cart);
+            if(!empty($actionRespon)){
+                return $actionRespon;
+            }
+            $post_type = $cart['post_type'];
+            $serviceRepo = '\\App\\Repositories\\' . ucfirst($post_type) . 'Repository';
+            $serviceObject = $serviceRepo::inst()->find($cart['post_id']);
+            if ($serviceObject) {
+                $cart_data = $cart['cart_data'];
+                $checkingBefore = $this->checkingBeforeCheckout($serviceObject, $cart);
+                if (!empty($checkingBefore)) {
+                    return $checkingBefore;
+                }
+
+                if (in_array($post_type, [GMZ_SERVICE_APARTMENT, GMZ_SERVICE_TOUR, GMZ_SERVICE_SPACE, GMZ_SERVICE_CAR, GMZ_SERVICE_BEAUTY])) {
+                    $serviceAvaiRepo = '\\App\\Repositories\\' . ucfirst($post_type) . 'AvailabilityRepository';
+                    $check_avail = $serviceAvaiRepo::inst()->checkAvailability($cart['post_id'], $cart_data['check_in'], $cart_data['check_out']);
+                    if (!$check_avail) {
+                        return [
+                            'status' => false,
+                            'message' => __('This service is not available')
+                        ];
+                    }
+                } elseif ($post_type == GMZ_SERVICE_HOTEL) {
+                    $roomAvaiRepo = RoomAvailabilityRepository::inst();
+                    $room_avails = [];
+                    $rooms = $cart_data['rooms'];
+                    if (!empty($rooms)) {
+                        foreach ($rooms as $k => $v) {
+                            if ($v['number'] > 0) {
+                                $avail = $roomAvaiRepo->checkAvailabilityWithGuest($k, $cart_data['check_in'], $cart_data['check_out'], $v['number'], $cart_data['adult'], $cart_data['children']);
+                                if ($avail->isEmpty()) {
+                                    $room_avails[] = $k;
+                                }
+                            }
+                        }
+                    }
+
+                    if (empty($room_avails)) {
+                        return [
+                            'status' => false,
+                            'message' => __('This service is not available.')
+                        ];
+                    }
+                }
+
+                //Validate form checkout
+               /* $valid = Validator::make($request->all(), [
+                    'first_name' => ['required'],
+                    'email' => ['required', 'email'],
+                    'phone' => ['required'],
+                    'address' => ['required'],
+                ]);*/
+
+                //dd($request);
+                if ($request['first_name']==null && $request['email']==null && $request['phone']==null && $request['address']==null) {
+                    return [
+                        'status' => 0,
+                        'message' => "erreur"
+                    ];
+                }
+
+                $post_data = $request;
+
+                $agree = $request['agree'];
+                if ($agree != 1) {
+                    return [
+                        'status' => 0,
+                        'message' => __('Please agree with our Terms and Conditions')
+                    ];
+                }
+
+                if (!is_user_login()) {
+                    $userRepo = UserRepository::inst();
+                    $user_exists = $userRepo->where(['email' => $post_data['email']], true);
+                    if (!empty($user_exists)) {
+                        return [
+                            'status' => false,
+                            'message' => __('Your email already exists. Please login with that email or use another email')
+                        ];
+                    }
+
+                    $user_password = random_user_password(8);
+                    $user_data = [
+                        'first_name' => $post_data['first_name'],
+                        'last_name' => $post_data['last_name'],
+                        'email' => $post_data['email'],
+                        'password' => Hash::make($user_password),
+                        'password_origin' => $user_password,
+                        'address' => $post_data['address']
+                    ];
+
+                    $user_id = $userRepo->create($user_data);
+
+                    if ($user_id) {
+                        $roleUserRepo = RoleUserRepository::inst();
+                        $roleUserRepo->create([
+                            'role_id' => 3,
+                            'user_id' => $user_id,
+                        ]);
+                        $user_data['user_id'] = $user_id;
+
+                        Auth::attempt([
+                            'email' => $post_data['email'],
+                            'password' => $user_password
+                        ], true);
+
+                        dispatch(new SendUserJob($user_data));
+                    } else {
+                        return [
+                            'status' => false,
+                            'message' => __('Have an error when creating new user. Please try again.')
+                        ];
+                    }
+                } else {
+                    $user_id = get_current_user_id();
+                }
+
+                $payment = $post_data['payment_method'];
+                if ($payment="paydunia") {
+                    $payment = 'bank_transfer';
+                }
+
+                $gateways_obj = \Gateway::inst()->getGateway($payment);
+
+                $checkout_data = $cart;
+                unset($checkout_data['post_object']);
+
+                $token_code = ($payment == 'stripe') ? $post_data['stripeToken'] : '';
+                $commission = (get_option('commission')) ? get_option('commission') : 0;
+
+                $order_data = Eventy::filter('gmz_checkout_data', array(
+                    'sku' => uniqid(),
+                    'post_id' => $cart['post_id'],
+                    'total' => $cart['total'], // TOTAL A RECUPERER
+                    'number' => isset($cart_data['number']) ? $cart_data['number'] : 1,
+                    'buyer' => $user_id,
+                    'owner' => $serviceObject['author'],
+                    'payment_type' => $payment,
+                    'checkout_data' => json_encode($checkout_data),
+                    'token_code' => $token_code,
+                    'currency' => json_encode(current_currency()),
+                    'start_date' => $cart_data['check_in'],
+                    'end_date' => $cart_data['check_out'],
+                    'start_time' => isset($cart_data['start_time']) ? $cart_data['start_time'] : 0,
+                    'end_time' => isset($cart_data['end_time']) ? $cart_data['end_time'] : 0,
+                    'post_type' => $post_type,
+                    'payment_status' => GMZ_PAYMENT_PENDING,
+                    'status' => GMZ_STATUS_INCOMPLETE,
+                    'first_name' => $post_data['first_name'],
+                    'last_name' => $post_data['last_name'],
+                    'email' => $post_data['email'],
+                    'phone' => $post_data['phone'],
+                    'address' => $post_data['address'],
+                    'city' => $post_data['city'],
+                    'country' => $post_data['country'],
+                    'postcode' => $post_data['postcode'],
+                    'note' => $post_data['note'],
+                    'commission' => $commission
+                ), $cart);
+
+                //Check add new or update order
+              /*  $order_token = $request['order_token'];
+                if (!empty($order_token)) {
+                    $order_require_updates = $this->repository->findOneBy(['order_token' => $order_token]);
+                    if (!empty($order_require_updates) && ($order_require_updates['payment_status'] == 0)) {
+                        $this->repository->updateByWhere(['order_token' => $order_token], [
+                            'first_name' => $post_data['first_name'],
+                            'last_name' => $post_data['last_name'],
+                            'email' => $post_data['email'],
+                            'phone' => $post_data['phone'],
+                            'address' => $post_data['address'],
+                            'city' => $post_data['city'],
+                            'country' => $post_data['country'],
+                            'postcode' => $post_data['postcode'],
+                            'note' => $post_data['note'],
+                            'payment_type' => $payment,
+                            'payment_status' => GMZ_PAYMENT_PENDING,
+                        ]);
+                        $this->repository->appendChangeLog($order_require_updates['id'], 'system', 're-order');
+                        $re_order = true;
+                        $order_id = $order_require_updates['id'];
+                    }
+                }*/
+
+                if (empty($re_order)) {
+                    $order_id = $this->repository->create($order_data);
+
+                    $this->repository->updateByWhere(['id' => $order_id], [
+                        'order_token' => gmz_hashing($order_id),
+                        'sku' => 668 + $order_id,
+                    ]);
+                }
+
+                $after_payment = \BaseGateway::inst()->doCheckout($gateways_obj, $order_id,'paydunia',$token);
                 if (!isset($after_payment['order_id'])) {
                     $after_payment['order_id'] = $order_id;
                 }

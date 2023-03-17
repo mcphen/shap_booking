@@ -52,6 +52,8 @@ Route::group([
     Route::post('get-real-price', 'AvailabilityController@getRealPriceAction');
 
     Route::get('checkout', 'OrderController@checkoutView')->name('checkout');
+    Route::get('success_payment', 'OrderController@success_payment')->name('success_payment');
+    Route::get('cancel_payment', 'OrderController@cancel_payment')->name('cancel_payment');
     Route::post('checkout', 'OrderController@checkoutAction');
     Route::get('payment-checking', 'OrderController@paymentChecking')->name('payment-checking');
     Route::get('complete-order', 'OrderController@completeOrder')->name('complete-order');

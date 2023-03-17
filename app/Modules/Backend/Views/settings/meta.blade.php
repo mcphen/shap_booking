@@ -5,7 +5,15 @@
             @foreach($settings as $key => $val)
                 <h3>{{__($val['label'])}}</h3>
                 <section class="mt-4">
-                    @php print_r($val) @endphp
+                    @php
+
+
+                        /*if($val['id']=="pricing_settings"){
+                          //  echo "pricing";
+                         //   $val['fields'][] = ['id'=>"price_one_hour",'label'=>"Prix pour une heure",'type'=>"number",'layout'=>"col-lg-4 col-md-6 col-sm-6 col-12",'std'=>"",'break'=>1];
+                            // [id] => base_price [label] => Base Price [type] => text [std] => [break] => 1 [validation] => required [layout] => col-lg-4 col-md-6 col-sm-6 col-12
+                        }print_r($val);*/
+                    @endphp
                     <form class="gmz-form-action form-translation" action="{{$action}}" method="POST" data-loader="body">
                         <input type="hidden" name="post_id" value="{{$serviceData['id']}}" />
                         @php
@@ -18,7 +26,7 @@
                         <div class="row">
                         @foreach($val['fields'] as $_key => $_val)
                             @php
-                           // print_r($_val);
+                          //  print_r($_val);
                                 if($_val['id'] == 'post_description'){
                                    $_val['layout']='d-none';
                                 }

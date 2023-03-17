@@ -42,7 +42,13 @@
             </div>
 
             @php
-                $settings = admin_config('settings', GMZ_SERVICE_HOTEL);// dd($settings);
+                $settings = admin_config('settings', GMZ_SERVICE_HOTEL);
+                $settings[2]['fields'][] = ['id'=>"price_one_hour",'label'=>"Prix pour une heure",'type'=>"number",'layout'=>"col-lg-4 col-md-6 col-sm-6 col-12",'std'=>"",'break'=>true];
+                //$settings[2]['fields'][]= ['id'=>"price_two_hour",'label'=>"Prix pour deux heures",'type'=>"number",'layout'=>"col-lg-4 col-md-6 col-sm-6 col-12",'std'=>"",'break'=>true];
+                //$settings[2]['fields'][] = ['id'=>"price_three_hour",'label'=>"Prix pour trois heures",'type'=>"number",'layout'=>"col-lg-4 col-md-6 col-sm-6 col-12",'std'=>"",'break'=>true];
+                //$settings[2]['fields'][] = ['id'=>"price_four_hour",'label'=>"Prix pour quatres heures",'type'=>"number",'layout'=>"col-lg-4 col-md-6 col-sm-6 col-12",'std'=>"",'break'=>true];
+               // $settings[2]['fields'][] = ['id'=>"price_five_hour",'label'=>"Prix pour cinq heures",'type'=>"number",'layout'=>"col-lg-4 col-md-6 col-sm-6 col-12",'std'=>"",'break'=>true];
+                //dd($settings[2]);
                 $action = dashboard_url('save-hotel');
             @endphp
 

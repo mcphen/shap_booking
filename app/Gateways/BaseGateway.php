@@ -25,7 +25,9 @@ if(!class_exists('BaseGateway')) {
 			];
 		}
 
-		public function doCheckout( $payment_used, $order_id ) {
+		public function doCheckout( $payment_used, $order_id, $paydunia,$token ) {
+            //dd($payment_used);
+           // echo $order_id; die();
 			$orderModel = new \App\Models\Order();
 			$order      = $orderModel->query()->find( $order_id );
 
@@ -38,9 +40,33 @@ if(!class_exists('BaseGateway')) {
 
 			$response = $payment_used->doPaymentCheckout( $order_id );
 
-			if ( ! empty( $response['redirect'] ) ) {
+            //dd($response);
+
+			if ( ! empty( $response['redirect'] ) && $paydunia!="paydunia" ) {
 				return $response;
-			} else {
+			}elseif (! empty( $response['redirect'] ) && $paydunia=="paydunia" ){
+
+                //remove cart
+                \Cart::inst()->removeCart();
+
+                //update payment status of order
+                $orderModel->query()
+                    ->where( 'id', $order_id )
+                    ->update( [
+                        'payment_status' => GMZ_PAYMENT_COMPLETED,
+                        'status'         => 'complete',
+                        'transaction_id' => $token
+                    ] );
+                $orderModel->appendChangeLog( $order_id, 'system', 'payment success' );
+
+                add_money_to_wallet( $order_id );
+
+                // Returns ajax data
+                // Go to OrderControler@PaymentChecking
+                $response['redirect'] = $this->getLinkPaymentChecking( $order_id );
+
+                return $response;
+            } else {
 				if ( ! empty( $response['payment_status'] ) && isset( $response['transaction_id'] ) ) {
 
 					//remove cart

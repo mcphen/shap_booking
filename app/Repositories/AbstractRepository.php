@@ -130,7 +130,9 @@ abstract class AbstractRepository
     {
         $result = $this->model->find($id);
         if ($result) {
+            //
             $result->update($data);
+            //dd($result);
             return $result;
         }
 

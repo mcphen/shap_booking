@@ -963,6 +963,7 @@ class HotelService extends AbstractService
             if (isset($post_data['post_content'])) {
                 $post_data['post_content'] = balance_tags($post_data['post_content']);
             }
+            // A VOIR ICI
 
             if (isset($post_data['base_price'])) {
                 if($post_data['base_price']>=5000){
@@ -974,9 +975,13 @@ class HotelService extends AbstractService
                         'message' => "Le prix doit etre supérieur à 5000"
                     ];
                 }
+               // dd($post_data['price_one_hour']);
 
             }
 
+            if (isset($post_data['price_one_hour'])) {
+                $post_data['price_one_hour'] = intval($post_data['price_one_hour']);
+            }
             if (isset($post_data['min_day_booking'])) {
                 $post_data['min_day_booking'] = intval($post_data['min_day_booking']);
             }
