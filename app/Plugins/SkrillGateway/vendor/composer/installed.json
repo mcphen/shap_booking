@@ -1,0 +1,53 @@
+{
+    "packages": [
+        {
+            "name": "obydul/laraskrill",
+            "version": "1.1.0",
+            "version_normalized": "1.1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mdobydullah/laraskrill.git",
+                "reference": "08327448ffb48b802682868dfbafea968830dc77"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mdobydullah/laraskrill/zipball/08327448ffb48b802682868dfbafea968830dc77",
+                "reference": "08327448ffb48b802682868dfbafea968830dc77",
+                "shasum": ""
+            },
+            "time": "2020-05-24T08:40:46+00:00",
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Obydul\\LaraSkrill\\LaraSkrillServiceProvider"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Obydul\\LaraSkrill\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Md Obydullah",
+                    "email": "hi@obydul.me"
+                }
+            ],
+            "description": "LaraSkrill is a laravel plugin for processing payments through Skrill.",
+            "support": {
+                "issues": "https://github.com/mdobydullah/laraskrill/issues",
+                "source": "https://github.com/mdobydullah/laraskrill/tree/master"
+            },
+            "install-path": "../obydul/laraskrill"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}
