@@ -9,7 +9,7 @@ public/storage/
 public/plugins/
 public/themes/
 composer.lock
-public/css/
+
 public/html/assets/css/
 node_modules/
 app/Plugins/BluesnapGateway/vendor/
