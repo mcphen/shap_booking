@@ -90,8 +90,8 @@
                                 foreach ($postIds as $s){
                                     $post = get_post($s, $item['post_type']);
                                     $postData[] = [
-                                        'title' => get_translate($post['post_title']),
-                                        'url' => get_the_permalink($post['post_slug'], $data['post_type'])
+                                        'title' => isset($post['post_title']) ? get_translate($post['post_title']) :"" ,
+                                        'url' =>  isset($post['post_slug']) ? get_the_permalink($post['post_slug'], $data['post_type']) :""
                                     ];
                                 }
                             @endphp

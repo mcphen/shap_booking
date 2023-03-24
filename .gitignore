@@ -5,11 +5,9 @@
 .idea/
 database/.gitignore
 vendor/*
-public/storage/
-public/plugins/
-public/themes/
+
 composer.lock
-public/css/
+
 
 node_modules/
 
