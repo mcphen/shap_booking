@@ -204,6 +204,7 @@
         transition: all 0.3s;
         &.show{
           left: 0;
+          background-color: #0174bc;
         }
         &.hide{
           left: -100%;
