@@ -45,10 +45,10 @@
    $children = (int)request()->get('children', 0);
    $infant = (int)request()->get('infant', 0);
 @endphp
-<div class="booking-type d-flex align-items-center">
+<!--div class="booking-type d-flex align-items-center">
     <a href="javascript:void(0);" data-type="day" class="@if($bookingType == 'day') active @endif">{{__('By Day')}}</a>
-    <!--a href="javascript:void(0);" data-type="hour" class="@if($bookingType == 'hour') active @endif">{{__('By Hour')}}</a-->
-</div>
+    <a href="javascript:void(0);" data-type="hour" class="@if($bookingType == 'hour') active @endif">{{__('By Hour')}}</a>
+</div-->
 <form id="search-space" method="GET" class="search-form space" action="{{url('space-search')}}">
     <input type="hidden" name="bookingType" id="booking-type-input" value="{{$bookingType}}" />
     <div class="search-form__basic">
