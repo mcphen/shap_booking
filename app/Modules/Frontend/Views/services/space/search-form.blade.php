@@ -39,7 +39,7 @@
    $checkInOutTime = request()->get('checkInOutTime', '');
    $startTime = request()->get('startTime', '');
    $endTime = request()->get('endTime', '');
-   $bookingType = request()->get('bookingType', 'hour');
+   $bookingType = request()->get('bookingType', 'day');
 
    $adult = (int)request()->get('adult', 1);
    $children = (int)request()->get('children', 0);
