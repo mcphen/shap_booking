@@ -73,7 +73,7 @@ $external_booking = $post['external_booking'];
 
             <div class="booking-quantity">
                 <div class="label">
-                    {{__('Adults')}}
+                    {{__('Nombre de personne')}}
                 </div>
                 <div class="value">
                     <select class="form-control" name="adult">
@@ -89,35 +89,6 @@ $external_booking = $post['external_booking'];
                 </div>
             </div>
 
-                <div class="booking-quantity">
-                    <div class="label">
-                        {{__('Children')}}
-                    </div>
-                    <div class="value">
-                        <select class="form-control" name="children">
-                            @if($guests > 0)
-                                @for($i = 0; $i <= $guests; $i++)
-                                    <option value="{{$i}}">{{$i}}</option>
-                                @endfor
-                            @endif
-                        </select>
-                    </div>
-                </div>
-
-                <div class="booking-quantity">
-                    <div class="label">
-                        {{__('Infants')}}
-                    </div>
-                    <div class="value">
-                        <select class="form-control" name="infant">
-                            @if($guests > 0)
-                                @for($i = 0; $i <= $guests; $i++)
-                                    <option value="{{$i}}">{{$i}}</option>
-                                @endfor
-                            @endif
-                        </select>
-                    </div>
-                </div>
             @php
                 $extras = maybe_unserialize($post['extra_services']);
             @endphp
