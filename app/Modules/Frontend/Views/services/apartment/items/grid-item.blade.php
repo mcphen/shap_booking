@@ -50,7 +50,8 @@
             <div class="apartment-item__price">
                 <span class="_retail">{{convert_price($item->base_price)}}</span><span class="_unit">{{__('per night')}}</span>
             </div>
-            <a class="btn btn-primary apartment-item__view-detail" href="{{get_apartment_permalink($item->post_slug)}}">{{__('View Detail ')}}</a>
+            <a class="btn btn-primary apartment-item__view-detail"
+               href="{{get_apartment_permalink($item->post_slug)}}">{{__('View Detail')}}</a>
         </div>
     </div>
 </div>
