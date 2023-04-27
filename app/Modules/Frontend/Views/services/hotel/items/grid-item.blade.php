@@ -37,7 +37,7 @@
             <div class="hotel-item__price">
                 <span class="_retail">{{convert_price($item->base_price)}}</span><span class="_unit">{{__('night')}}</span>
             </div>
-            <a class="btn btn-primary hotel-item__view-detail" href="{{get_hotel_permalink($item->post_slug)}}">{{__('View Detail ')}}</a>
+            <a class="btn btn-primary hotel-item__view-detail" href="{{get_hotel_permalink($item->post_slug)}}">{{__('View Detail')}}</a>
         </div>
     </div>
 </div>

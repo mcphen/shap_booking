@@ -18,8 +18,8 @@
     @action('gmz_homepage_after_slider')
     @include('Frontend::services.hotel.items.type')
     @include('Frontend::services.hotel.items.recent')
-       @include('Frontend::services.car.items.type')
-    @include('Frontend::services.car.items.recent')
+       @include('Frontend::services.appartment.items.type')
+    @include('Frontend::services.appartment.items.recent')
 
     @include('Frontend::services.tour.items.type')
     @include('Frontend::services.tour.items.recent')

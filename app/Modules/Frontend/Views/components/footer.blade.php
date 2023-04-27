@@ -62,7 +62,7 @@
                 @endphp
             @endif
             <div class="copyright text-center">
-                ©{{date('Y')}} SHAP COMPANY - All rights reserved.
+                ©{{date('Y')}} SHAP AFRICA - All rights reserved.
             </div>
             @php
                 $social = get_option('social');
