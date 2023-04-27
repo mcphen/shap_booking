@@ -54,7 +54,7 @@
                     <div class="space-item__price">
                         <span class="_retail">{{convert_price($item->base_price)}}</span><span class="_unit">{{get_booking_type($item->booking_type)}}</span>
                     </div>
-                    <a class="btn btn-primary" href="{{get_space_permalink($item->post_slug)}}">{{__('View Detail ')}}</a>
+                    <a class="btn btn-primary" href="{{get_space_permalink($item->post_slug)}}">{{__('View Detail')}}</a>
                 </div>
             </div>
         </div>

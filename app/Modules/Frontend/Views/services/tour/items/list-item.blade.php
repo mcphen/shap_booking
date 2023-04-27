@@ -43,7 +43,7 @@
                     <div class="tour-item__price">
                         <span class="_retail">{{convert_price($item['adult_price'])}}</span>
                     </div>
-                    <a class="btn btn-primary tour-item__view-detail" href="{{get_tour_permalink($item->post_slug)}}">{{__('View Detail ')}}</a>
+                    <a class="btn btn-primary tour-item__view-detail" href="{{get_tour_permalink($item->post_slug)}}">{{__('View Detail')}}</a>
                 </div>
             </div>
         </div>
