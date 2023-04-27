@@ -897,6 +897,9 @@
                     quantity = $('[name="number"]', form),
                     checkbox = $('.accordion [type="checkbox"]', form);
 
+                console.log("quantity titlee");
+                console.log(quantity);
+
                 quantity.on('change', function () {
                     base.initBookingForm();
                 });
