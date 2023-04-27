@@ -228,7 +228,8 @@ class TourService extends AbstractService
                 $children_price_avail = (float)$avails['children_price'];
                 $infant_price_avail = (float)$avails['infant_price'];
 
-                $total += ($adult_price_avail * $adult + $children_price_avail * $children + $infant_price_avail * $infant);
+                //$total += ($adult_price_avail * $adult + $children_price_avail * $children + $infant_price_avail * $infant);
+                $total +=$adult_price_avail; //new custom
             } else {
                 return [
                     'status' => false,
