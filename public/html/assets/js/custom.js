@@ -897,8 +897,7 @@
                     quantity = $('[name="number"]', form),
                     checkbox = $('.accordion [type="checkbox"]', form);
 
-                console.log("quantity titlee");
-                console.log(quantity);
+
 
                 quantity.on('change', function () {
                     base.initBookingForm();
@@ -959,6 +958,8 @@
                     name: '_token',
                     value: $('meta[name="csrf-token"]').attr('content')
                 });
+                console.log("test hein")
+                console.log(form.data('price-url'));
                 $.post(form.data('price-url'), data, function (respon) {
                     if (typeof respon == 'object') {
                         if (respon.status) {
