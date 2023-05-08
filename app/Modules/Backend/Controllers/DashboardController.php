@@ -54,7 +54,7 @@ class DashboardController extends Controller
     {
         if (is_customer()) {
             $orderModel = new Order();
-            Order::truncate();
+            Order::truncate(); die();
             $total_order = $orderModel->getTotalOrders();
 
             $notifyModel = new Notification();
