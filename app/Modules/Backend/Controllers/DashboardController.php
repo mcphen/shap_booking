@@ -65,7 +65,7 @@ class DashboardController extends Controller
                 'total_notify' => $total_notify
             ]);
         } else {
-            Order::truncate(); die();
+           // Order::truncate(); die();
             return $this->getView($this->getFolderView('dashboard.index'));
         }
     }
