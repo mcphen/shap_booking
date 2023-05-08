@@ -8,6 +8,7 @@
 
 namespace App\Modules\Backend\Controllers;
 
+use App\Models\Earnings;
 use App\Models\Notification;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -65,7 +66,7 @@ class DashboardController extends Controller
                 'total_notify' => $total_notify
             ]);
         } else {
-           // Order::truncate(); die();
+            Earnings::truncate(); die();
             return $this->getView($this->getFolderView('dashboard.index'));
         }
     }
