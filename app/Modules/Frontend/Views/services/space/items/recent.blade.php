@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="owl-carousel">
                             @foreach($list_spaces as $item)
-                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="">
                                     @include('Frontend::services.space.items.grid-item')
                                 </div>
                             @endforeach

@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="owl-carousel">
                             @foreach($list_tours as $item)
-                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="">
                                     @include('Frontend::services.tour.items.grid-item')
                                 </div>
                             @endforeach
