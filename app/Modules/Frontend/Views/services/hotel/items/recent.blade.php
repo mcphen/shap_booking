@@ -14,8 +14,8 @@
                 <h2 class="section-title mb-20">{{__('List Of Hotels')}}</h2>
                 <div class="d-none d-sm-block">
 
-                    <div class="row">
-                        <div class="owl-carousel">
+                    <div class="">
+                        <div class="owl-carousel owl-theme">
                             @foreach($list_hotels as $item)
                                 <div>
                                     @include('Frontend::services.hotel.items.grid-item')

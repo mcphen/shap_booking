@@ -15,7 +15,7 @@
                 <h2 class="section-title mb-20">{{__('List Of Apartments')}}</h2>
                 <div class="d-none d-sm-block">
                     <div class="row">
-                        <div class="owl-carousel">
+                        <div class="owl-carousel owl-theme">
                             @foreach($list_apartments as $item)
                                 <div class="">
                                     @include('Frontend::services.apartment.items.grid-item')
