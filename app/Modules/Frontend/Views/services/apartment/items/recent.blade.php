@@ -3,7 +3,7 @@
         enqueue_scripts('match-height');
         $list_apartments = get_posts([
             'post_type' => GMZ_SERVICE_APARTMENT,
-            'posts_per_page' => 3,
+            'posts_per_page' => 6,
             'status' => 'publish',
             'is_featured' => 'on'
         ]);
@@ -15,11 +15,13 @@
                 <h2 class="section-title mb-20">{{__('List Of Apartments')}}</h2>
                 <div class="d-none d-sm-block">
                     <div class="row">
-                        @foreach($list_apartments as $item)
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                @include('Frontend::services.apartment.items.grid-item')
-                            </div>
-                        @endforeach
+                        <div class="owl-carousel">
+                            @foreach($list_apartments as $item)
+                                <div class="col-lg-4 col-md-4 col-sm-12">
+                                    @include('Frontend::services.apartment.items.grid-item')
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
                 <div class="d-xl-none">

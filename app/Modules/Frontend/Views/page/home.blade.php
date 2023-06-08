@@ -16,6 +16,8 @@
 @section('content')
     @include('Frontend::page.home.slider')
     @action('gmz_homepage_after_slider')
+
+
     @include('Frontend::services.hotel.items.type')
     @include('Frontend::services.hotel.items.recent')
 
