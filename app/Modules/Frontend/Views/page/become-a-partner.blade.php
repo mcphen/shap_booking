@@ -25,11 +25,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 partner-form__left">
-                    @if($success->any())
+                    @if (session()->has('success'))
                         <div class="alert alert-success">
-                            <h4>{{$success->first()}}</h4>
+                            {{ session()->get('success') }}
                         </div>
-
                     @endif
                     <div class="become-form">
                         <h2 class="title">{{__('Become A Partner')}}</h2>
