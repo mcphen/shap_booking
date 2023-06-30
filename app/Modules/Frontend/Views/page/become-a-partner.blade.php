@@ -25,6 +25,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 partner-form__left">
+                    @if($success->any())
+                        <div class="alert alert-success">
+                            <h4>{{$success->first()}}</h4>
+                        </div>
+
+                    @endif
                     <div class="become-form">
                         <h2 class="title">{{__('Become A Partner')}}</h2>
                         <form class="" action="{{url('become-a-partner-new')}}" enctype="multipart/form-data" method="POST">

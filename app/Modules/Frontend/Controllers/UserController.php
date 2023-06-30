@@ -61,7 +61,7 @@ class UserController extends Controller
     public function becomeAPartnerActionNew(Request $request)
     {
         $response = $this->service->partnerRegister($request);
-        return redirect()->back();
+        return redirect()->back()->withSuccess(['msg' => 'Votre inscription a été enregistré avec succès! vous pouvez vous connecter.']);
     }
 
     public function registerView(Request $request)
