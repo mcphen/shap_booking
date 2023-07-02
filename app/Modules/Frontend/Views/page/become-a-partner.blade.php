@@ -75,7 +75,7 @@
                 </div>
                 <div class="col-lg-7 partner-form__right">
                     <div class="become-intro">
-                        <h3>{{__('Why partner on shap company?')}}</h3>
+                        <h3>{{__('Why partner on shap africa?')}}</h3>
                         <p>{{__('Join our community and start uploading your properties. We make it simple and secure to host travelers.')}}</p>
                     </div>
                 </div>
