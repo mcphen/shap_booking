@@ -115,7 +115,7 @@ class UserService extends AbstractService
             \GMZ_Notification::inst()->addNew($admin_id, $admin_id, __('New Partner request'), __('New Partner request on ') . date(get_date_format()));
 
 
-           // dispatch(new SendPartnerRequestJob($post_data));
+            dispatch(new SendPartnerRequestJob($post_data));
 
             return [
                 'status' => 1,
