@@ -101,7 +101,7 @@ class UserService extends AbstractService
         $newPostData = $post_data;
         unset($newPostData['piece_identite']);
 
-        dd($newPostData);
+       // dd($newPostData);
         unset($post_data_insert['agree']);
         $post_data_insert['piece_identite_path'] = $pathPieceIdentite;
         $post_data_insert['piece_identite'] = $filenamePiece;
@@ -120,7 +120,7 @@ class UserService extends AbstractService
             \GMZ_Notification::inst()->addNew($admin_id, $admin_id, __('New Partner request'), __('New Partner request on ') . date(get_date_format()));
 
 
-            dispatch(new SendPartnerRequestJob($post_data));
+            dispatch(new SendPartnerRequestJob($newPostData));
 
             return [
                 'status' => 1,
