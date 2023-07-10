@@ -98,7 +98,10 @@ class UserService extends AbstractService
 
         $post_data_insert = $post_data;
 
-        dd($post_data);
+        $newPostData = $post_data;
+        unset($newPostData['piece_identite']);
+
+        dd($newPostData);
         unset($post_data_insert['agree']);
         $post_data_insert['piece_identite_path'] = $pathPieceIdentite;
         $post_data_insert['piece_identite'] = $filenamePiece;
