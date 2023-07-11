@@ -127,7 +127,7 @@ class UserService extends AbstractService
 
             Mail::to($newPostData['email'])->send($email);
 
-            dispatch(new SendPartnerRequestJob($newPostData)); die();
+            dispatch(new SendPartnerRequestJob($newPostData)); //die();
 
             return [
                 'status' => 1,
