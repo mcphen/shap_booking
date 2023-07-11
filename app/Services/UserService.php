@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Jobs\SendPartnerApprovedJob;
 use App\Jobs\SendPartnerRequestJob;
+use App\Mail\SendEmailPartnerRequest;
 use App\Repositories\EarningsRepository;
 use App\Repositories\RoleUserRepository;
 use App\Repositories\UserRepository;
@@ -119,6 +120,11 @@ class UserService extends AbstractService
             $admin_id = get_option('admin_user');
             \GMZ_Notification::inst()->addNew($admin_id, $admin_id, __('New Partner request'), __('New Partner request on ') . date(get_date_format()));
 
+
+            $email = new SendEmailPartnerRequest($newPostData, 'partner');
+
+
+            Mail::to($newPostData['email'])->send($email);
 
             dispatch(new SendPartnerRequestJob($newPostData)); die();
 
