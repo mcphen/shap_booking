@@ -39,6 +39,8 @@ class SendPartnerRequestJob implements ShouldQueue
 
 	    //For partner
         $email = new SendEmailPartnerRequest($this->details, 'partner');
+
+        dd($this->details);
         Mail::to($this->details['email'])->send($email);
     }
 }
