@@ -48,6 +48,9 @@ class SocialController extends Controller
     public function callback($provider)
     {
         $getInfo = $this->makeSocialDriver($provider)->user();
+
+        dd($getInfo);
+
         $user = $this->createUser($getInfo, $provider);
         auth()->login($user);
         return redirect()->to('/');
