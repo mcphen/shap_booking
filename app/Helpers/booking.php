@@ -138,3 +138,125 @@ if(!function_exists('get_list_date_form_today')) {
 		return $dates;
 	}
 }
+
+
+function create_token_dpo($datas){
+    $companyToken      = '8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3';
+    $accountType       = '5525';
+    $paymentAmount     = $datas['montant'];
+    $paymentCurrency   = $datas['currency'];
+    $customerFirstName = $datas['firstname'];
+    $customerLastName  = $datas['name'];
+    $customerAddress   = $datas['address'];
+    $customerCity      = $datas['city'];
+    $customerCountry   = $datas['country'];
+    $customerPhone     = $datas['phone'];
+    $redirectURL       = 'https://shapafrica.com/success_payment';
+    $backURL           = 'https://bookings.noworkstoursandtravel.com/subham/pg/backurl.php';
+    $customerEmail     = $datas['email'];
+    $reference         = 'shapcompany' . '_' .'teston';
+
+    $odate   = date( 'Y/m/d H:i' );
+    $postXml = <<<POSTXML
+    <?xml version="1.0" encoding="utf-8"?>
+    <API3G>
+    <CompanyToken>$companyToken</CompanyToken>
+    <Request>createToken</Request>
+    <Transaction>
+        <PaymentAmount>$paymentAmount</PaymentAmount>
+        <PaymentCurrency>$paymentCurrency</PaymentCurrency>
+        <CompanyRef>$reference</CompanyRef>
+        <customerFirstName>$customerFirstName</customerFirstName>
+        <customerLastName>$customerLastName</customerLastName>
+        <customerAddress>$customerAddress</customerAddress>
+        <customerCity>$customerCity</customerCity>
+        <customerCountry>$customerCountry</customerCountry>
+        <customerPhone>$customerPhone</customerPhone>
+        <RedirectURL>$redirectURL</RedirectURL>
+        <BackURL>$backURL</BackURL>
+        <customerEmail>$customerEmail</customerEmail>
+    </Transaction>
+    <Services>
+        <Service>
+            <ServiceType>$accountType</ServiceType>
+            <ServiceDescription>$reference</ServiceDescription>
+            <ServiceDate>$odate</ServiceDate>
+        </Service>
+    </Services>
+    </API3G>
+POSTXML;
+
+    //echo $postXml;
+
+    $curl = curl_init();
+    curl_setopt_array( $curl, array(
+        CURLOPT_URL            => "https://secure.3gdirectpay.com/API/v6/",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING       => "",
+        CURLOPT_MAXREDIRS      => 10,
+        CURLOPT_TIMEOUT        => 30,
+        CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST  => "POST",
+        CURLOPT_POSTFIELDS     => $postXml,
+        CURLOPT_HTTPHEADER     => array(
+            "cache-control: no-cache",
+        ),
+    ) );
+    $responded = false;
+    $attempts  = 0;
+
+    //Try up to 10 times to create token
+    while ( !$responded && $attempts < 10 ) {
+        $error    = null;
+        $response = curl_exec( $curl );
+        $error    = curl_error( $curl );
+
+        if ( $response != '' ) {
+            $responded = true;
+
+        }
+        $attempts++;
+    }
+    curl_close( $curl );
+
+    if ( $error ) {
+        return [
+            'success' => false,
+            'error'   => $error,
+        ];
+        exit;
+    }
+
+    if ( $response != '' ) {
+        $xml= new SimpleXMLElement($response);
+        // $xml = new \SimpleXMLElement( $response );
+
+        //Check if token was created successfully
+        if ( $xml->xpath( 'Result' )[0] != '000' ) {
+            exit();
+        } else {
+            $transToken        = $xml->xpath( 'TransToken' )[0]->__toString();
+            $result            = $xml->xpath( 'Result' )[0]->__toString();
+            $resultExplanation = $xml->xpath( 'ResultExplanation' )[0]->__toString();
+            $transRef          = $xml->xpath( 'TransRef' )[0]->__toString();
+
+            //echo 'success'.$transToken;
+
+            return [
+                'success'           => true,
+                'result'            => $result,
+                'transToken'        => $transToken,
+                'resultExplanation' => $resultExplanation,
+                'transRef'          => $transRef,
+            ];
+
+        }
+    } else {
+        var_dump($xml);
+        return [
+            'success' => false,
+            'error'   => $response,
+        ];
+        exit;
+    }
+}

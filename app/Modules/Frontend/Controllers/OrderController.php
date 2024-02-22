@@ -61,13 +61,21 @@ class OrderController extends Controller
 
     public function checkoutAction(Request $request)
     {
+        return $this->paiement_dpo($request);
         if($request->payment_method=="paydunia"){
-            return $this->paiement_paydunia($request);
+
         }else{
             $response = $this->service->checkOut($request);
             return response()->json($response);
         }
 
+    }
+
+    public function paiement_dpo(Request $request)
+    {
+        $cart = \Cart::inst()->getCart();
+        $datas = $request->all();
+        dd($cart,$datas);
     }
 
     public function paiement_paydunia(Request $request){
@@ -98,7 +106,8 @@ class OrderController extends Controller
         }
     }
 
-    public function success_payment(){
+    public function success_payment(Request $request){
+        dd($request->all());
         $token = $_GET['token'];
         $invoice = new CheckoutInvoice();
         if ($invoice->confirm($token)) {//we test if we have the right token before saving in the payment table

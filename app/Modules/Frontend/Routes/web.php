@@ -43,6 +43,7 @@ Route::group([
     'middleware' => ['web', 'locale'],
 ], function () {
     Route::get('/', 'PageController@getHomePage')->name('home');
+    Route::get('/zpo_test', [\App\Modules\Frontend\Controllers\HomeController::class,'zpo_test']);
     Route::get('become-a-partner', 'PageController@getBecomePartnerPage')->name('become-a-partner');
     Route::post('become-a-partner', 'UserController@becomeAPartnerAction');
     Route::post('become-a-partner-new', 'UserController@becomeAPartnerActionNew');
