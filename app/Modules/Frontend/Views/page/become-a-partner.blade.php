@@ -25,6 +25,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 partner-form__left">
+                    @if (session()->has('success'))
+                        <div class="alert alert-success">
+                            {{ session()->get('success') }}
+                        </div>
+                    @endif
                     <div class="become-form">
                         <h2 class="title">{{__('Become A Partner')}}</h2>
                         <form class="" action="{{url('become-a-partner-new')}}" enctype="multipart/form-data" method="POST">
@@ -70,7 +75,7 @@
                 </div>
                 <div class="col-lg-7 partner-form__right">
                     <div class="become-intro">
-                        <h3>{{__('Why partner on shap company?')}}</h3>
+                        <h3>{{__('Pourquoi devenir partenaire de SHAP ?')}}</h3>
                         <p>{{__('Join our community and start uploading your properties. We make it simple and secure to host travelers.')}}</p>
                     </div>
                 </div>

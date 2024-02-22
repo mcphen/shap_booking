@@ -4,12 +4,14 @@ namespace App\Services;
 
 use App\Jobs\SendPartnerApprovedJob;
 use App\Jobs\SendPartnerRequestJob;
+use App\Mail\SendEmailPartnerRequest;
 use App\Repositories\EarningsRepository;
 use App\Repositories\RoleUserRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserService extends AbstractService
 {
@@ -97,6 +99,11 @@ class UserService extends AbstractService
         $post_data['request'] = 1;
 
         $post_data_insert = $post_data;
+
+        $newPostData = $post_data;
+        unset($newPostData['piece_identite']);
+
+       // dd($newPostData);
         unset($post_data_insert['agree']);
         $post_data_insert['piece_identite_path'] = $pathPieceIdentite;
         $post_data_insert['piece_identite'] = $filenamePiece;
@@ -113,7 +120,15 @@ class UserService extends AbstractService
         if ($inserted) {
             $admin_id = get_option('admin_user');
             \GMZ_Notification::inst()->addNew($admin_id, $admin_id, __('New Partner request'), __('New Partner request on ') . date(get_date_format()));
-           // dispatch(new SendPartnerRequestJob($post_data));
+
+
+            $email = new SendEmailPartnerRequest($newPostData, 'partner');
+
+
+            Mail::to($newPostData['email'])->send($email);
+
+            dispatch(new SendPartnerRequestJob($newPostData)); //die();
+
             return [
                 'status' => 1,
                 'message' => __('Send your request successfully. Please wait admin review your account. Now, you can login as normal user on site')

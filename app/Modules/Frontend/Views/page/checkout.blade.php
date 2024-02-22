@@ -47,7 +47,7 @@
             <div class="row">
                 <div class="col-lg-8 cart-user-form">
                     <div class="page-heading checkout">
-                        <h1>{{__('Checkout')}}</h1>
+                        <h1>Saisissez vos informations</h1>
                     </div>
 
                     <form class="" id="checkout-form" method="post" action="{{url('checkout')}}">

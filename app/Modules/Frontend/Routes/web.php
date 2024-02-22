@@ -28,7 +28,7 @@ Route::group([
     Route::get('password/reset/{token}', 'UserController@showResetForm')->name('password.reset');
 
     Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
-    Route::get('/callback/{provider}', 'SocialController@callback');
+    Route::get('/callback/{provider}', 'SocialController@callback'); //  //
 });
 
 Route::group([

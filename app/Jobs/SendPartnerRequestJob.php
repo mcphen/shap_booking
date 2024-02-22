@@ -33,12 +33,15 @@ class SendPartnerRequestJob implements ShouldQueue
     public function handle()
     {
         //For admin
+        //dd($this->details);
         $email = new SendEmailPartnerRequest($this->details, 'admin');
         $user_admin = get_user_data(get_option('admin_user'));
 	    Mail::to($user_admin['email'])->send($email);
 
 	    //For partner
         $email = new SendEmailPartnerRequest($this->details, 'partner');
+
+
         Mail::to($this->details['email'])->send($email);
     }
 }

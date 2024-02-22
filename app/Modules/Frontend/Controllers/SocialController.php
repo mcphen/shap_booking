@@ -48,6 +48,9 @@ class SocialController extends Controller
     public function callback($provider)
     {
         $getInfo = $this->makeSocialDriver($provider)->user();
+
+        //dd($getInfo);
+
         $user = $this->createUser($getInfo, $provider);
         auth()->login($user);
         return redirect()->to('/');
@@ -68,6 +71,9 @@ class SocialController extends Controller
             $path = $path_only . '/' . $getInfo->id . '_avatar.jpg';
             File::put($path, $fileContents);
 
+            if( $getInfo->email==null){
+                $getInfo->email= $getInfo->id."@facebook.com";
+            }
             $user = User::query()->create([
                 'first_name' => $getInfo->name,
                 'email' => $getInfo->email,
