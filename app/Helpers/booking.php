@@ -143,8 +143,8 @@ if(!function_exists('get_list_date_form_today')) {
 
 
 function create_token_dpo($datas){
-    $companyToken      = '8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3';
-    $accountType       = '5525';
+    $companyToken      = 'D1EABD05-99D3-4589-BAE7-DD7365F2413E';
+    $accountType       = '86253';
     $paymentAmount     = $datas['montant'];
     $paymentCurrency   = $datas['currency']?$datas['currency']:"XOF";
     $customerFirstName = $datas['firstname']?$datas['firstname']:"";
