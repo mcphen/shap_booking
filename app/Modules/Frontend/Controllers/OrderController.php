@@ -89,7 +89,7 @@ class OrderController extends Controller
             'address'=>$request['address'],
             'city'=>'dakar',
             'country'=>'SN',
-            'phone'=>$request['phone'],
+           // 'phone'=>$request['phone'],
             'email'=>$request['email'],
         ];
         $token = create_token_dpo($datas);// echo $token;dd($dataRequest,$datas);
