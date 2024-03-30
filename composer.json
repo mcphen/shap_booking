@@ -26,7 +26,8 @@
         "omnipay/stripe": "^3.1",
         "paydunya/paydunya": "^1.0",
         "tormjens/eventy": "^0.7.0",
-        "zepson/dpo-laravel": "^1.0"
+        "zepson/dpo-laravel": "^1.0",
+      "ext-curl": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

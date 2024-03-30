@@ -23,7 +23,7 @@ class HomeController extends Controller
             'montant'=>'10.00',
             'currency'=>'XOF',
             'firstname'=>'test',
-            'name'=>'enock',
+            'name'=>'stephen',
             'address'=>'Grand dakar',
             'city'=>'dakar',
             'country'=>'SN',
@@ -34,4 +34,6 @@ class HomeController extends Controller
         return Redirect::to('https://secure.3gdirectpay.com/payv2.php?ID='.$token['transToken']);
 
     }
+
+
 }

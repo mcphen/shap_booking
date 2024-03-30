@@ -345,7 +345,7 @@ class OrderService extends AbstractService
         ];
     }
 
-    public function checkOutPaydunia($request,$token)
+    public function checkOutPaydunia($request,$token="")
     {
         $cart = \Cart::inst()->getCart();
         if (!empty($cart)) {

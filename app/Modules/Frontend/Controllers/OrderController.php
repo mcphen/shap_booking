@@ -61,21 +61,37 @@ class OrderController extends Controller
 
     public function checkoutAction(Request $request)
     {
-        return $this->paiement_dpo($request);
-        if($request->payment_method=="paydunia"){
+        $cartVar = \Cart::inst()->getCart();
+        $response = $this->service->checkOutPaydunia($request);
 
-        }else{
-            $response = $this->service->checkOut($request);
-            return response()->json($response);
-        }
+        $currency = \Currency::get_inst()->currentCurrency();
+        $cart = $cartVar;
+        $dataRequest = $request->all();
+
+        $currencies="XOF";
+        $datas=[
+            'montant'=>$cart['total'],
+            'currency'=>$currencies,
+            'firstname'=>$request['first_name'],
+            'name'=>$request['last_name'],
+            'address'=> $request['address'],
+            'city'=>$request['city'],
+            'country'=>$request['country'],
+            'phone'=>$request['phone'],
+            'email'=>$request['email'],
+        ];
+
+        $token = create_token_dpo($datas);// echo $token;dd($dataRequest,$datas);
+        return Redirect::to('https://secure.3gdirectpay.com/payv2.php?ID='.$token['transToken']);
+
+       // return $currency['unit'];
+
 
     }
 
-    public function paiement_dpo(Request $request)
+    public function paiement_dpo(Request $request,$cartVar)
     {
-        $cart = \Cart::inst()->getCart();
-        $datas = $request->all();
-        dd($cart,$datas);
+
     }
 
     public function paiement_paydunia(Request $request){
@@ -107,32 +123,92 @@ class OrderController extends Controller
     }
 
     public function success_payment(Request $request){
-        dd($request->all());
-        $token = $_GET['token'];
-        $invoice = new CheckoutInvoice();
-        if ($invoice->confirm($token)) {//we test if we have the right token before saving in the payment table
-            if($invoice->getStatus() == 'completed')
-            {
-                $datas = $invoice->getCustomData('datas');
-                $request = $datas;
-                //dd($datas);
-                $response = $this->service->checkOutPaydunia($datas,$token);
-               // dd($response);
-               // $response_decode = json_decode($response) ;
-              //  $url = $response_decode->redirect;
+        $postXml = <<<POSTXML
+    <?xml version="1.0" encoding="utf-8"?>
+    <API3G>
+      <CompanyToken>57466282-EBD7-4ED5-B699-8659330A6996</CompanyToken>
+      <Request>verifyToken</Request>
+      <TransactionToken>72983CAC-5DB1-4C7F-BD88-352066B71592</TransactionToken>
+    </API3G>
+POSTXML;
 
-                if(isset( $response['redirect'] )){
-                    return \redirect()->to($response['redirect']) ;
-                }else{
-                    return \redirect()->to('/') ;
-                }
+        //echo $postXml; die();
 
+        $curl = curl_init();
+        curl_setopt_array( $curl, array(
+            CURLOPT_URL            => "https://secure.3gdirectpay.com/API/v6/",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING       => "",
+            CURLOPT_MAXREDIRS      => 10,
+            CURLOPT_TIMEOUT        => 30,
+            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST  => "POST",
+            CURLOPT_POSTFIELDS     => $postXml,
+            CURLOPT_HTTPHEADER     => array(
+                "cache-control: no-cache",
+            ),
+        ) );
+        $responded = false;
+        $attempts  = 0;
 
-                //echo 1;
-            }else{
-                echo "echec";
+        //Try up to 10 times to create token
+        while ( !$responded && $attempts < 10 ) {
+            $error    = null;
+            $response = curl_exec( $curl );
+            $error    = curl_error( $curl );
+
+            if ( $response != '' ) {
+                $responded = true;
+
             }
+            $attempts++;
         }
+        curl_close( $curl );
+
+       // dd($curl);
+
+        if ( $error ) {
+            return [
+                'success' => false,
+                'error'   => $error,
+            ];
+            exit;
+        }
+
+        if ( $response != '' ) {
+            $xml= new \SimpleXMLElement($response);
+            // $xml = new \SimpleXMLElement( $response );
+
+            //Check if token was created successfully
+            if ( $xml->xpath( 'Result' )[0] != '000' ) {
+                exit();
+            } else {
+                $transToken        = $xml->xpath( 'TransToken' )[0]->__toString();
+                $result            = $xml->xpath( 'Result' )[0]->__toString();
+                $resultExplanation = $xml->xpath( 'ResultExplanation' )[0]->__toString();
+                $transRef          = $xml->xpath( 'TransRef' )[0]->__toString();
+
+                //echo 'success'.$transToken;
+
+                return [
+                    'success'           => true,
+                    'result'            => $result,
+                    'transToken'        => $transToken,
+                    'resultExplanation' => $resultExplanation,
+                    'transRef'          => $transRef,
+                ];
+
+            }
+        } else {
+            var_dump($xml);
+            return [
+                'success' => false,
+                'error'   => $response,
+            ];
+            exit;
+        }
+
+
     }
 
     public function cancel_payment(){
@@ -153,6 +229,35 @@ class OrderController extends Controller
 
         //dd($order_token);
         return view('Frontend::page.checkout')->with('order_data', $order_data);
+    }
+
+    public function test_success(){
+
+        $endpoint = "https://secure.3gdirectpay.com/API/v6/";
+        $xmlData = "<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<API3G>
+  <CompanyToken>8D3DA73D-9D7F-4E09-96D4-3D44E7A83EA3</CompanyToken>
+  <Request>verifyToken</Request>
+  <TransactionToken>72983CAC-5DB1-4C7F-BD88-352066B71592</TransactionToken>
+</API3G>";
+
+        $ch = curl_init();
+
+        if (!$ch) {
+            die("Couldn't initialize a cURL handle");
+        }
+        curl_setopt($ch, CURLOPT_URL, $endpoint);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml'));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $xmlData);
+
+        $result = curl_exec($ch);
+
+        curl_close($ch);
+
+        return $result;
     }
 
 }
