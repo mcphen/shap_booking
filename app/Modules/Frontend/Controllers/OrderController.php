@@ -86,11 +86,11 @@ class OrderController extends Controller
             'currency'=>$currencies,
             'firstname'=>$request['first_name'],
             'name'=>$request['last_name'],
-            'address'=>'Grand dakar',
+            'address'=>$request['address'],
             'city'=>'dakar',
             'country'=>'SN',
-            'phone'=>'1234789',
-            'email'=>'test@shapcompany.com',
+            'phone'=>$request['phone'],
+            'email'=>$request['email'],
         ];
         $token = create_token_dpo($datas);// echo $token;dd($dataRequest,$datas);
         return Redirect::to('https://secure.3gdirectpay.com/payv2.php?ID='.$token['transToken']);
