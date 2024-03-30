@@ -68,10 +68,10 @@ class OrderController extends Controller
         $cart = $cartVar;
         $dataRequest = $request->all();
 
-        $currencies="XOF";
+        //
         $datas=[
             'montant'=>$cart['total'],
-            'currency'=>$currencies,
+            'currency'=>$currency['unit'],
             'firstname'=>$request['first_name'],
             'name'=>$request['last_name'],
             'address'=> $request['address'],
@@ -80,7 +80,18 @@ class OrderController extends Controller
             'phone'=>$request['phone'],
             'email'=>$request['email'],
         ];
-
+        $currencies="XOF";
+        $datas=[
+            'montant'=>$cart['total'],
+            'currency'=>$currencies,
+            'firstname'=>$request['first_name'],
+            'name'=>$request['last_name'],
+            'address'=>'Grand dakar',
+            'city'=>'dakar',
+            'country'=>'SN',
+            'phone'=>'1234789',
+            'email'=>'test@shapcompany.com',
+        ];
         $token = create_token_dpo($datas);// echo $token;dd($dataRequest,$datas);
         return Redirect::to('https://secure.3gdirectpay.com/payv2.php?ID='.$token['transToken']);
 
