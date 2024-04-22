@@ -113,7 +113,7 @@
                         @php
                             $payments = Gateway::inst()->getPaymentsAvailable();
                         @endphp
-                        <div class="payment-form">
+                        <!--div class="payment-form">
                             <p class="payment-form__title">{{__('Select Payment Method')}}</p>
                             @if(!empty($payments))
                                 @foreach($payments as $item)
@@ -151,7 +151,7 @@
 
                                 </label>
                             </div>
-                        </div>
+                        </div-->
 
                         <label class="checkbox-inline mt-5">
                             <input type="checkbox" name="agree" checked value="1">
